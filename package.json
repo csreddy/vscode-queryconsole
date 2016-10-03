@@ -1,0 +1,155 @@
+{
+    "name": "marklogic-query-console",
+    "displayName": "marklogic-query-console",
+    "description": "query console for marklogic",
+    "version": "0.0.1",
+    "publisher": "sudhakar",
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+    "categories": [
+        "Languages",
+        "Other"
+    ],
+    "keywords": [
+        "marklogic",
+        "query console",
+        "execute",
+        "query runner"
+    ],
+    "activationEvents": [
+        "onCommand:query-console.run"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "query-console.run",
+                "title": "Run Query"
+            },
+            {
+                "command": "query-console.stop",
+                "title": "Stop Query"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "query-console.run",
+                "key": "ctrl+alt+n"
+            },
+            {
+                "command": "query-console.stop",
+                "key": "ctrl+alt+m"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "query-console.run",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "configuration": {
+            "type": "object",
+            "title": "Query Console Configuration",
+            "properties": {
+                "query-console.MarkLogicHost": {
+                    "type": "string",
+                    "default": "localhost",
+                    "description": "Set the default REST server hostname."
+                },
+                "query-console.MarkLogicPort": {
+                    "type": "string",
+                    "default": "8000",
+                    "description": "Set the default REST server port."
+                },
+                "query-console.MarkLogicEvalEndpoint": {
+                    "type": "string",
+                    "default": "/LATEST/eval",
+                    "description": "Set the default REST server endpoint."
+                },
+                "query-console.username": {
+                    "type": "string",
+                    "default": "admin",
+                    "description": "Set the REST server username."
+                },
+                "query-console.password": {
+                    "type": "string",
+                    "default": "admin",
+                    "description": "Set the REST server password."
+                },
+                "query-console.auth": {
+                    "type": "string",
+                    "default": "BASIC",
+                    "description": "Set the REST server authentication type. Only Basic is supported"
+                },
+                "query-console.databases": {
+                    "type": "array",
+                    "default": [
+                        "Documents"
+                    ],
+                    "description": "Set the list of databases"
+                },
+                "query-console.defaultDatabase": {
+                    "type": "string",
+                    "default": "Documents",
+                    "description": "Set the default database"
+                },
+                "query-console.defaultLanguage": {
+                    "type": "string",
+                    "default": "javascript",
+                    "description": "Set the default language to run."
+                },
+                "query-console.cwd": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Set the working directory."
+                },
+                "query-console.fileDirectoryAsCwd": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether to use the directory of the file to be executed as the working directory."
+                },
+                "query-console.clearPreviousOutput": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether to clear previous output before each run."
+                },
+                "query-console.saveFileBeforeRun": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether to save the file before running."
+                }
+            }
+        },
+        "languages": [
+            {
+                "id": "query-console-output",
+                "mimetypes": [
+                    "text/x-code-output",
+                    "multipart/mixed"
+                ]
+            }
+        ],
+        "grammars": [
+            {
+                "language": "query-console-output",
+                "scopeName": "query-console.output",
+                "path": "./syntaxes/query-console-output.tmLanguage"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "dependencies": {
+        "tree-kill": "^1.1.0"
+    },
+    "devDependencies": {
+        "typescript": "^1.8.5",
+        "vscode": "^0.11.0"
+    }
+}
